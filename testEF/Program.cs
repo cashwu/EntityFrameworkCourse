@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using testEF.Models;
-using AppContext = testEF.Models.AppContext;
 
 namespace testEF
 {
@@ -10,14 +9,15 @@ namespace testEF
     {
         static void Main(string[] args)
         {
-            AppContext.RegisterRoutie(typeof(Test), CustomerValidation.Instance.Check);
-
-            var app = new AppContext();
+            var app = new MyDbContext();
 
             var t = new Test
             {
-                Id = 3,
-                Name = "ABC123"
+                Id = 5,
+                Name = "ABC123",
+                Age = 1123,
+                TT = 123,
+                QQ = 123
             };
 
             app.Test.Add(t);

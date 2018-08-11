@@ -5,16 +5,20 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 
 namespace testEF.Models
 {
-    public partial class AppContext : DbContext
+    public partial class MyDbContext : DbContext
+            // add in OnConfiguration Method
     {
-        public AppContext()
+        public MyDbContext()
         {
+            Database.Migrate();
         }
 
-        public AppContext(DbContextOptions<AppContext> options)
+        public MyDbContext(DbContextOptions<MyDbContext> options)
                 : base(options)
         {
         }
@@ -28,13 +32,14 @@ namespace testEF.Models
         public virtual DbSet<Patients> Patients { get; set; }
         public virtual DbSet<Test> Test { get; set; }
 
+        private static readonly LoggerFactory MyLoggerFactory
+                = new LoggerFactory(new[] { new ConsoleLoggerProvider((_, __) => true, true) });
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=127.0.0.1;Database=MyDataEnt;User ID=sa;Password=P@ssw0rd;");
-            }
+            optionsBuilder.EnableSensitiveDataLogging();
+            optionsBuilder.UseLoggerFactory(MyLoggerFactory);
+            optionsBuilder.UseSqlServer("Server=127.0.0.1;Database=MyDataEntTest2;User ID=sa;Password=P@ssw0rd;");
         }
 
         private static Dictionary<Type, Func<object, ValidationException>> _processRouties =
