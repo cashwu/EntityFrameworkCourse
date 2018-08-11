@@ -9,7 +9,16 @@
       <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
       <secret-storage>master_key</secret-storage>
       <user-name>sa</user-name>
-      <introspection-schemas>*:*</introspection-schemas>
+      <introspection-schemas>*:*|@:|MyDataEnt:|MyDataEntTest:|MyDataEntTest2:|Scalpel:|aspnet-testOfficeLogin:|model:|msdb:|tempdb:</introspection-schemas>
+    </data-source>
+    <data-source name="postgres@127.0.0.1" uuid="abd93ebe-a8cd-405b-90d2-9a8651dde7a4">
+      <database-info product="PostgreSQL" version="10.5 (Debian 10.5-1.pgdg90+1)" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.2" family="POSTGRES" exact-version="10.5">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>sa</user-name>
+      <introspection-schemas>@:@</introspection-schemas>
     </data-source>
   </component>
 </project>

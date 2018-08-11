@@ -16,8 +16,7 @@ namespace testEF
                 Id = 5,
                 Name = "ABC123",
                 Age = 1123,
-                TT = 123,
-                QQ = 123
+                TT = 123
             };
 
             app.Test.Add(t);

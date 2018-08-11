@@ -9,7 +9,5 @@ namespace testEF.Models
         public string Name { get; set; }
         public int Age { get; set; }
         public int TT { get; set; }
-        public int QQ { get; set; }
-        
     }
 }
