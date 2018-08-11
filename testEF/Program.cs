@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 using testEF.Models;
 using AppContext = testEF.Models.AppContext;
 
@@ -15,7 +16,7 @@ namespace testEF
 
             var t = new Test
             {
-                Id = 2,
+                Id = 3,
                 Name = "ABC123"
             };
 

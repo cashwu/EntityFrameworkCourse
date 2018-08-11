@@ -54,9 +54,9 @@ namespace testEF.Models
 
             foreach (var entity in entities)
             {
-                if (_processRouties.ContainsKey(entities.GetType()))
+                if (_processRouties.ContainsKey(entity.GetType()))
                 {
-                    var exception = _processRouties[entities.GetType()].Invoke(entity);
+                    var exception = _processRouties[entity.GetType()].Invoke(entity);
 
                     if (exception != null)
                     {
