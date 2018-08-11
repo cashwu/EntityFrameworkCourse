@@ -9,31 +9,52 @@ namespace testEF
     {
         static void Main(string[] args)
         {
-            AppContext.RegisterRoutie(typeof(Test), o =>
-            {
-                if (o is Test test)
-                {
-                    if (test.Name.Contains("123"))
-                    {
-                       return new ValidationException("name error"); 
-                    }
-                }
+            AppContext.RegisterRoutie(typeof(Test), CustomerValidation.Instance.Check);
 
-                return null;
-            });
-            
             var app = new AppContext();
 
             var t = new Test
             {
+                Id = 2,
                 Name = "ABC123"
             };
 
             app.Test.Add(t);
-                   
+
             app.SaveChanges();
 
             Console.ReadLine();
+        }
+    }
+
+    public class CustomerValidation
+    {
+        private static CustomerValidation _instance;
+
+        public static CustomerValidation Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                   _instance = new CustomerValidation(); 
+                }
+
+                return _instance;
+            }
+        }
+        
+        public ValidationException Check(object obj)
+        {
+            if (obj is Test test)
+            {
+                if (test.Name.Contains("123"))
+                {
+                    return new ValidationException("name error");
+                }
+            }
+
+            return null;
         }
     }
 }

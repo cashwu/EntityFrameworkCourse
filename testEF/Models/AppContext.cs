@@ -54,11 +54,14 @@ namespace testEF.Models
 
             foreach (var entity in entities)
             {
-                var exception = _processRouties[entities.GetType()].Invoke(entity);
-
-                if (exception != null)
+                if (_processRouties.ContainsKey(entities.GetType()))
                 {
-                    throw exception;
+                    var exception = _processRouties[entities.GetType()].Invoke(entity);
+
+                    if (exception != null)
+                    {
+                        throw exception;
+                    }
                 }
 
                 // if (entity is Test test)
